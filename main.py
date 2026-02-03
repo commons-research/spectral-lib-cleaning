@@ -8,15 +8,21 @@ import shutil
 
 from matchms.yaml_file_functions import load_workflow_from_yaml_file
 
+
 def main():
-    parser = argparse.ArgumentParser(description='Run matchms library cleaning')
-    parser.add_argument('--input_mgf_path', type=str, help='Input mgf file')
-    parser.add_argument('--output_path', type=str, help='Output folder', default="./results_library_cleaning")
+    parser = argparse.ArgumentParser(description="Run matchms library cleaning")
+    parser.add_argument("--input_mgf_path", type=str, help="Input mgf file")
+    parser.add_argument(
+        "--output_path",
+        type=str,
+        help="Output folder",
+        default="./results_library_cleaning",
+    )
     args = parser.parse_args()
-    
+
     results_folder = args.output_path
     os.makedirs(results_folder, exist_ok=True)
-    
+
     # Original (Keeping here to hopefully add compound class back in later)
     # compound_class_csv_file = os.path.join(results_folder, "compound_name_annotation.csv")
 
@@ -25,7 +31,6 @@ def main():
     #                                                              {"annotated_compound_names_file": compound_class_csv_file, "mass_tolerance": 0.1})])
     # compound_class_csv_file = os.path.join(results_folder, "compound_name_annotation.csv")
 
-    
     workflow = create_workflow(
         yaml_file_name=os.path.join(results_folder, "matchms_pipeline_settings.yaml"),
         query_filters=[
@@ -54,7 +59,10 @@ def main():
             msfilters.derive_inchikey_from_inchi,
             (msfilters.repair_smiles_of_salts, {"mass_tolerance": 0.1}),
             (msfilters.repair_parent_mass_is_molar_mass, {"mass_tolerance": 0.1}),
-            (msfilters.repair_adduct_and_parent_mass_based_on_smiles, {"mass_tolerance": 0.1}),
+            (
+                msfilters.repair_adduct_and_parent_mass_based_on_smiles,
+                {"mass_tolerance": 0.1},
+            ),
             msfilters.repair_not_matching_annotation,
             msfilters.require_valid_annotation,
             (msfilters.require_correct_ionmode, {"ion_mode_to_keep": "both"}),
@@ -62,20 +70,21 @@ def main():
             msfilters.require_matching_adduct_precursor_mz_parent_mass,
             msfilters.require_matching_adduct_and_ionmode,
             msfilters.normalize_intensities,
-    ])
+        ],
+    )
 
-    pipeline = Pipeline(workflow,
-                        logging_file=os.path.join(results_folder, "library_cleaning_log.log"),
-                        logging_level="WARNING")
-    
+    pipeline = Pipeline(
+        workflow,
+        logging_file=os.path.join(results_folder, "library_cleaning_log.log"),
+        logging_level="WARNING",
+    )
 
     temp_output = os.path.join(results_folder, "cleaned_spectra.mgf")
     if os.path.exists(temp_output):
         os.remove(temp_output)
-        
 
     pipeline.run(args.input_mgf_path, cleaned_query_file=temp_output)
-    
+
     # Move the temporary output to the final position
     # Check if exists
     if os.path.exists(temp_output):
@@ -83,6 +92,7 @@ def main():
         shutil.move(temp_output, os.path.join(results_folder, "cleaned_spectra.mgf"))
     else:
         print("No cleaned spectra were generated.")
-    
+
+
 if __name__ == "__main__":
     main()
