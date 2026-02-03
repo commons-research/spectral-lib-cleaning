@@ -1,0 +1,10 @@
+[project]
+name = "spectral-lib-cleaning"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["matchms>=0.31.0"]
+
+[dependency-groups]
+dev = ["jupyterlab>=4.5.3"]
