@@ -1,11 +1,11 @@
 # Workflow from https://github.com/Wang-Bioinformatics-Lab/gnps_ml_processing_workflow/blob/14982a7d787f52b6c8749785b4d33843adbd324c/GNPS_ML_Processing/bin/matchms/matchms_cleaning.py
-import os
-from matchms.filtering.default_pipelines import LIBRARY_CLEANING
-from matchms.Pipeline import Pipeline, create_workflow
-import matchms.filtering as msfilters
 import argparse
+import os
 import shutil
 
+import matchms.filtering as msfilters
+from matchms.filtering.default_pipelines import LIBRARY_CLEANING
+from matchms.Pipeline import Pipeline, create_workflow
 from matchms.yaml_file_functions import load_workflow_from_yaml_file
 
 

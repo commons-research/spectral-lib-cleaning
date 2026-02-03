@@ -1,5 +1,9 @@
-MONA = "https://mona.fiehnlab.ucdavis.edu/rest/downloads/retrieve/024f4ef5-924f-4f2b-a86d-a23f8013e695"
-MASS_BANK = "https://github.com/MassBank/MassBank-data/releases/download/2025.10/MassBank_NISTformat.msp"
+MONA = [
+    "https://mona.fiehnlab.ucdavis.edu/rest/downloads/retrieve/024f4ef5-924f-4f2b-a86d-a23f8013e695"
+]
+MASS_BANK = [
+    "https://github.com/MassBank/MassBank-data/releases/download/2025.10/MassBank_NISTformat.msp"
+]
 
 GNPS_ENDPOINT = "https://external.gnps2.org/gnpslibrary/"
 GNPS_LIBS = [

@@ -1881,6 +1881,7 @@ source = { editable = "." }
 dependencies = [
     { name = "downloaders" },
     { name = "matchms" },
+    { name = "tqdm" },
 ]
 
 [package.dev-dependencies]
@@ -1892,6 +1893,7 @@ dev = [
 requires-dist = [
     { name = "downloaders", specifier = ">=1.0.22" },
     { name = "matchms", specifier = ">=0.31.0" },
+    { name = "tqdm", specifier = ">=4.67.2" },
 ]
 
 [package.metadata.requires-dev]
