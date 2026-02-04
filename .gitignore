@@ -10,3 +10,4 @@ wheels/
 .venv
 downloads/
 *.mgf
+results_library_cleaning/
