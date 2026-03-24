@@ -24,7 +24,7 @@ def download_merge(ctx):
 
 @main.command()
 @click.argument("input", type=click.Path(exists=True))
-@click.argument("ouput", type=click.Path())
+@click.argument("output", type=click.Path())
 @click.pass_context
 def clean(ctx, input, output):
     """"""

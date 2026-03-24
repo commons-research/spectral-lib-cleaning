@@ -64,6 +64,7 @@ def run_clean(config: Config, input: str, output: str):
             msfilters.require_matching_adduct_precursor_mz_parent_mass,
             msfilters.require_matching_adduct_and_ionmode,
             msfilters.normalize_intensities,
+            (msfilters.reduce_to_number_of_peaks, {"n_max": 128}),
         ],
     )
 
@@ -75,4 +76,6 @@ def run_clean(config: Config, input: str, output: str):
         logging_level="WARNING",
     )
 
-    pipeline.run(input_path, cleaned_query_file=str(config.processed_dir / output_path))
+    pipeline.run(
+        str(input_path), cleaned_query_file=str(config.processed_dir / output_path)
+    )

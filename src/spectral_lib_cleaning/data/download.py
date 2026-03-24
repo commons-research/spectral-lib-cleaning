@@ -65,4 +65,8 @@ def run_download(config: Config) -> None:
         ):
             spectra.append(i)
 
-    save_as_mgf(spectra=spectra, filename=str(config.raw_dir / "merged_libraries.mgf"))
+    save_as_mgf(
+        spectra=spectra,
+        filename=str(config.raw_dir / "merged_libraries.mgf"),
+        file_mode="w",
+    )
