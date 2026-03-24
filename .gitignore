@@ -12,3 +12,4 @@ downloads/
 *.mgf
 results_library_cleaning/
 .env
+data/
