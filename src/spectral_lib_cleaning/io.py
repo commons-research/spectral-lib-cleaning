@@ -112,7 +112,6 @@ def read_textual_ms_format(
             leave=False,
         )
     ):
-
         # Potentially mgf files can start with some metadata before the first spectrum
         if (spectrum_start_line is None and i == 0) or (
             spectrum_start_line is not None and line.startswith(spectrum_start_line)

@@ -31,3 +31,16 @@ def clean(ctx, input, output):
     from .clean import run_clean
 
     run_clean(ctx.obj["config"], input, output)
+
+
+@main.command()
+@click.argument("file_path", type=click.Path(exists=True))
+@click.option("--title", required=True, help="Zenodo deposit title")
+@click.option("--description", required=True, help="Zenodo deposit description")
+@click.option("--sandbox", is_flag=True, help="Use Zenodo sandbox (for testing)")
+@click.pass_context
+def publish(ctx, file_path, title, description, sandbox):
+    """Upload a merged dataset to Zenodo and get a DOI."""
+    from .postprocess.publish import run_publish
+
+    run_publish(file_path, title=title, description=description, sandbox=sandbox)
